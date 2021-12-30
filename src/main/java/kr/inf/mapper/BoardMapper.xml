@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.inf.mapper.BoardMapper">
+
+	<select id="getList" resultType="boardVO">
+		select * from tb_board ORDER BY idx DESC;
+	</select>
+
+	<insert id="insert" parameterType="boardVO">
+		INSERT INTO tb_board(title, contents, count, writer) VALUES 
+		(#{title}, #{contents}, #{count}, #{writer})
+	</insert>
+
+	<select id="read" parameterType="Integer" resultType="boardVO">
+		SELECT * FROM tb_board WHERE idx=#{idx}
+	</select>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM tb_board WHERE idx=#{idx}
+	</delete>
+	
+	<update id="update" parameterType="boardVO">
+		UPDATE tb_board SET title=#{title}, contents=#{contents} WHERE idx=#{idx}
+	</update>
+	
+	<update id="count" parameterType="Integer">
+		UPDATE tb_board SET count=count+1 WHERE idx=#{idx}
+	</update>
+	
+
+
+</mapper>
